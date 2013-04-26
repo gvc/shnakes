@@ -1,4 +1,6 @@
-module SHNAKES
+require 'shnakes/game_engine'
+
+module Shnakes
   WIDTH = 450
   HEIGHT = 400
 
@@ -7,23 +9,10 @@ module SHNAKES
     @debug = para "NO KEY is PRESSED."
     @direction = :right
     @square = rect(top: 195, left: 220, width: 10, height: 10, center: false)
+    @engine = GameEngine.new(self, @square, @debug)
 
-    @animation = animate(24) do
-      case @direction
-        when :right then @square.move(@square.left + 5, @square.top)
-        when :left then @square.move(@square.left - 5, @square.top)
-        when :down then @square.move(@square.left, @square.top + 5)
-        when :up then @square.move(@square.left, @square.top - 5)
-      end
-
-      @debug.replace "#{@square.left} - #{@square.top}"
-
-      checker = SHNAKES::DeathCondition.new(@square.left, @square.top)
-
-      if checker.dead?
-        background red
-        @animation.stop
-      end
+    @clock = animate(24) do
+      @engine.tick(@direction, @clock)
     end
 
     keypress do |key|
@@ -38,17 +27,6 @@ module SHNAKES
       end
 
       # @debug.replace "#{key.inspect}"
-    end
-  end
-
-  class DeathCondition
-    def initialize(left, top)
-      @left = left
-      @top = top
-    end
-
-    def dead?
-      @left <= 0 || @left >= WIDTH - Snake::WIDTH || @top <= 0 || @top >= HEIGHT - Snake::HEIGHT
     end
   end
 
