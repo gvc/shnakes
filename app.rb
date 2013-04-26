@@ -30,7 +30,7 @@ module SHNAKES
       case key
         when 'p' then @animation.stop
         when 'r' then @animation.start
-        when 'q' then exit
+        when 'q' then quit
         when :up then @direction = :up
         when :right then @direction = :right
         when :left then @direction = :left
