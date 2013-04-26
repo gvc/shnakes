@@ -10,6 +10,13 @@ module Shnakes
       @snake = Snake.new(app)
       @debug = debug
       @food = nil
+      @score = 0
+      @app.update_score(@score)
+    end
+
+    def cleanup
+      @food.remove if @food
+      @snake.cleanup
     end
 
     def change_direction(new_direction)
@@ -27,6 +34,8 @@ module Shnakes
 
       food_checker = Shnakes::FoodCondition.new(@snake, @food)
       if food_checker.ate?
+        @score += 1
+        @app.update_score @score
         @snake.increase_speed
         @food.remove
         @food = nil
@@ -36,7 +45,6 @@ module Shnakes
   private
 
     def create_food
-      # @app.stroke @app.rgb(1, 1, 1)
       @food = @app.oval(width: 5, height: 5, radius: 4, left: rand(WIDTH - 10) + 5, top: rand(HEIGHT - 10) + 5, center: false)
     end
   end

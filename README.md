@@ -13,6 +13,7 @@
 Use arrow keys to move the (future)snake. 
 
 Other keys:
+* `n` to Start a new game
 * `p` to pause
 * `r` to resume
 * `q` to quit

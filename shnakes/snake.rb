@@ -14,6 +14,10 @@ module Shnakes
       @direction = :right
     end
 
+    def cleanup
+      @square.remove
+    end
+
     def left
       @square.left
     end
