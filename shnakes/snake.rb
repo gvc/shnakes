@@ -7,6 +7,7 @@ module Shnakes
 
     def initialize(app)
       @app = app
+      @app.stroke @app.seagreen
       @square = @app.rect(top: 195, left: 220, width: WIDTH, height: HEIGHT, center: false)
     end
 
