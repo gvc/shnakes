@@ -14,7 +14,7 @@ Use arrow keys to move the (future)snake.
 
 Other keys:
 * `p` to pause
-* `r` to unpause
+* `r` to resume
 * `q` to quit
 
 If you die, re-run the app.
