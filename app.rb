@@ -6,7 +6,6 @@ module Shnakes
 
   Shoes.app title: 'SHNAKES!', width: WIDTH, height: HEIGHT do
 
-    @debug = para "NO KEY is PRESSED."
     @engine = GameEngine.new(self, @debug)
 
     @clock = animate(24) do
