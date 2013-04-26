@@ -7,10 +7,15 @@ module Shnakes
       @app = app
       @square = square
       @debug = debug
+      @direction = :right
     end
 
-    def tick(direction, clock)
-      case direction
+    def change_direction(new_direction)
+      @direction = new_direction
+    end
+
+    def tick(clock)
+      case @direction
         when :right then @square.move(@square.left + 5, @square.top)
         when :left then @square.move(@square.left - 5, @square.top)
         when :down then @square.move(@square.left, @square.top + 5)
