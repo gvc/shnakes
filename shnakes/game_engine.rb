@@ -1,11 +1,12 @@
 require 'shnakes/death_condition'
+require 'shnakes/snake'
 
 module Shnakes
 
   class GameEngine
-    def initialize(app, square, debug)
+    def initialize(app, debug)
       @app = app
-      @square = square
+      @snake = Snake.new(app)
       @debug = debug
       @direction = :right
     end
@@ -16,15 +17,14 @@ module Shnakes
 
     def tick(clock)
       case @direction
-        when :right then @square.move(@square.left + 5, @square.top)
-        when :left then @square.move(@square.left - 5, @square.top)
-        when :down then @square.move(@square.left, @square.top + 5)
-        when :up then @square.move(@square.left, @square.top - 5)
+        when :right then @snake.go_right
+        when :left then @snake.go_left
+        when :down then @snake.go_down
+        when :up then @snake.go_up
       end
 
-      @debug.replace "#{@square.left} - #{@square.top}"
-
-      checker = Shnakes::DeathCondition.new(@square.left, @square.top)
+      @debug.replace "#{@snake.left} - #{@snake.top}"
+      checker = Shnakes::DeathCondition.new(@snake)
 
       if checker.dead?
         clock.stop
