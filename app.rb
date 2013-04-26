@@ -15,8 +15,8 @@ module Shnakes
 
     keypress do |key|
       case key
-        when 'p' then @animation.stop
-        when 'r' then @animation.start
+        when 'p' then @clock.stop
+        when 'r' then @clock.start
         when 'q' then quit
       else
         @engine.change_direction(key) if [:up, :right, :left, :down].include?(key)
